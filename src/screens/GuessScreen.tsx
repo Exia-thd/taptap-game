@@ -10,38 +10,24 @@ const BASE = '/taptap-game/assets'
 export default function GuessScreen({ sip, selected, onSelect, onNext }: Props) {
   return (
     <div className="screen guess-screen">
-      <div className="guess-top">
+      <img className="guess-bg" src={`${BASE}/img-4-8.png`} alt="" aria-hidden />
+
+      <div className="guess-header">
         <span className="badge">Vòng {sip} — Đoán sản phẩm</span>
-        <h2 className="guess-title">Bạn vừa thử<br />sản phẩm nào?</h2>
-        <p className="guess-sub">Chạm vào sản phẩm bạn nghĩ là đúng</p>
       </div>
 
-      <div className="guess-products">
-        {(['pro', 'coffee'] as const).map(type => {
-          const cls =
-            selected == null ? 'product-card'
-            : selected === type ? 'product-card selected'
-            : 'product-card dimmed'
-          return (
-            <div key={type} className={cls} onClick={() => onSelect(type)}>
-              <div className="product-photo-wrap">
-                <img
-                  className="product-photo"
-                  src={`${BASE}/milo-${type}.png`}
-                  alt={type === 'pro' ? 'MILO PRO' : 'MILO COFFEE'}
-                  draggable={false}
-                />
-              </div>
-              <span className={`product-name product-name-${type}`}>
-                {type === 'pro' ? 'MILO PRO' : 'MILO COFFEE'}
-              </span>
-            </div>
-          )
-        })}
+      <div className="guess-zones">
+        {(['pro', 'coffee'] as const).map(type => (
+          <div
+            key={type}
+            className={`guess-zone${selected === type ? ' selected' : ''}`}
+            onClick={() => onSelect(type)}
+          />
+        ))}
       </div>
 
       <div className="guess-footer">
-        {selected == null && <p className="guess-hint">Hãy chọn trước khi xem kết quả</p>}
+        {selected == null && <p className="guess-hint">Chạm vào sản phẩm bạn vừa thử</p>}
         <div className="cta-img-wrap">
           <img
             className={`cta-img${!selected ? ' disabled' : ''}`}

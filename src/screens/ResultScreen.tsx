@@ -6,7 +6,7 @@ interface Props {
 }
 
 const PRODUCTS = {
-  pro:    { icon: '💚', name: 'Milo Pro',    color: 'var(--green-light)' },
+  pro:    { icon: '💚', name: 'Milo Pro',    color: '#00D468' },
   coffee: { icon: '☕', name: 'Milo Coffee', color: '#D4860A' },
 }
 
@@ -34,7 +34,7 @@ export default function ResultScreen({ data, onExit }: Props) {
       <div className="result-top">
         <span className="badge">Kết quả cuối cùng</span>
         <h2 className="result-title">Điểm số của bạn</h2>
-        <p className="result-summary">Cùng xem bạn đã đoán đúng chưa nhé!</p>
+        <p className="result-sub">Cùng xem bạn đã đoán đúng chưa nhé!</p>
       </div>
 
       <div className="result-score-box">
@@ -56,7 +56,7 @@ export default function ResultScreen({ data, onExit }: Props) {
                   {meta.name}
                 </span>
               </div>
-              <span className={`result-row-badge ${correct ? 'result-badge-correct' : 'result-badge-wrong'}`}>
+              <span className={`result-row-badge ${correct ? 'badge-correct' : 'badge-wrong'}`}>
                 {correct ? '✓ Đúng' : '✗ Sai'}
               </span>
             </div>

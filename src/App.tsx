@@ -69,6 +69,11 @@ export default function App() {
       {screen === 'answer-2' && <AnswerScreen sip={2} guess={data.sip2Guess} onNext={next} />}
 
       {screen === 'result'   && <ResultScreen data={data} onExit={() => setScreen('landing')} />}
+
+      <div className="milo-corner" aria-hidden>
+        <span className="milo-corner-nestle">Nestlé</span>
+        <span className="milo-corner-brand">MILO</span>
+      </div>
     </div>
   )
 }

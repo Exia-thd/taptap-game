@@ -26,8 +26,8 @@ export default function SurveyScreen({ sip, selected, onSelect, onNext }: Props)
     <div className="screen survey-screen">
       <div className="survey-top">
         <span className="badge">Vòng {sip} — Khảo sát</span>
-        <p className="survey-question">Bạn hay dùng Milo khi nào?</p>
-        <p className="survey-hint">Chọn một hoặc nhiều tình huống</p>
+        <p className="survey-question"><>ĐÂU LÀ 'RIGHT MOMENT'<br />"CHO NGỤM NÀY"</></p>
+        <p className="survey-hint">Bạn có thể chọn nhiều hơn 1 hoạt động</p>
       </div>
 
       <div className="survey-grid">
@@ -47,13 +47,10 @@ export default function SurveyScreen({ sip, selected, onSelect, onNext }: Props)
       </div>
 
       <div className="survey-footer">
-        <p className="survey-count">
-          Đã chọn: <span>{selected.length}</span> / {boxes.length}
-        </p>
         <div className="cta-img-wrap">
           <img
             className={`cta-img${selected.length === 0 ? ' disabled' : ''}`}
-            src={`${BASE}/cta-green.png`}
+            src={`${BASE}/cta-xemkq.png`}
             alt="Chạm để tiếp tục"
             onClick={selected.length > 0 ? onNext : undefined}
           />
