@@ -5,54 +5,6 @@ interface Props {
   onExit: () => void
 }
 
-/* Minimal fake QR grid pattern */
-const QR_PATTERN = [
-  [1,1,1,1,1,1,1,0,0,1,0,1,0,0,1,1,1,1,1,1,1],
-  [1,0,0,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,1],
-  [1,0,1,1,1,0,1,0,0,1,1,0,0,0,1,0,1,1,1,0,1],
-  [1,0,1,1,1,0,1,0,1,1,0,1,0,0,1,0,1,1,1,0,1],
-  [1,0,1,1,1,0,1,0,0,0,1,1,1,0,1,0,1,1,1,0,1],
-  [1,0,0,0,0,0,1,0,1,0,0,1,0,0,1,0,0,0,0,0,1],
-  [1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1],
-  [0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0],
-  [1,0,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,0,0,1,0],
-  [0,1,1,0,1,0,0,0,1,0,0,1,0,1,0,0,0,1,1,0,1],
-  [1,0,0,1,1,1,1,1,0,0,1,1,0,0,1,1,0,0,1,0,0],
-  [0,1,0,0,1,0,0,0,1,0,1,0,1,0,0,1,0,1,0,0,1],
-  [1,1,0,1,0,1,1,0,0,1,0,0,1,1,1,1,1,0,0,1,0],
-  [0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,1],
-  [1,1,1,1,1,1,1,0,0,1,0,1,1,0,1,0,1,0,1,1,0],
-  [1,0,0,0,0,0,1,0,1,0,0,1,0,0,0,0,0,1,0,0,1],
-  [1,0,1,1,1,0,1,0,0,1,1,0,1,1,1,0,1,0,0,1,0],
-  [1,0,1,1,1,0,1,0,1,0,1,0,0,0,0,1,0,0,1,0,0],
-  [1,0,1,1,1,0,1,0,0,0,0,1,1,0,1,0,1,1,0,1,0],
-  [1,0,0,0,0,0,1,0,1,0,1,0,0,1,0,0,0,0,0,1,1],
-  [1,1,1,1,1,1,1,0,0,1,0,1,0,0,1,1,0,1,1,0,1],
-]
-
-function QRCode() {
-  const cells = QR_PATTERN.flat()
-  return (
-    <div className="qr-box">
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: `repeat(21, 1fr)`,
-        gridTemplateRows: `repeat(21, 1fr)`,
-        gap: 1.2,
-        width: '100%',
-        height: '100%',
-      }}>
-        {cells.map((v, i) => (
-          <div key={i} style={{
-            borderRadius: 1,
-            background: v ? '#111' : '#fff',
-          }} />
-        ))}
-      </div>
-    </div>
-  )
-}
-
 const PRODUCTS = {
   pro:    { icon: '💚', name: 'Milo Pro',    color: 'var(--green-light)' },
   coffee: { icon: '☕', name: 'Milo Coffee', color: '#D4860A' },
@@ -60,7 +12,7 @@ const PRODUCTS = {
 
 const ANSWERS: Record<1 | 2, 'pro' | 'coffee'> = { 1: 'pro', 2: 'coffee' }
 
-const SCORE_TEXT: Record<number, { emoji: string; msg: string }> = {
+const SCORE_MSG: Record<number, { emoji: string; msg: string }> = {
   0: { emoji: '😅', msg: 'Cần luyện thêm rồi!' },
   1: { emoji: '👍', msg: 'Không tệ chút nào!' },
   2: { emoji: '🏆', msg: 'Siêu cảm nhận! Xuất sắc!' },
@@ -70,11 +22,11 @@ export default function ResultScreen({ data, onExit }: Props) {
   const sip1Correct = data.sip1Guess === ANSWERS[1]
   const sip2Correct = data.sip2Guess === ANSWERS[2]
   const score = (sip1Correct ? 1 : 0) + (sip2Correct ? 1 : 0)
-  const { emoji, msg } = SCORE_TEXT[score]
+  const { emoji, msg } = SCORE_MSG[score]
 
   const rows = [
-    { sip: 1 as const, guess: data.sip1Guess, correct: sip1Correct },
-    { sip: 2 as const, guess: data.sip2Guess, correct: sip2Correct },
+    { sip: 1 as const, correct: sip1Correct },
+    { sip: 2 as const, correct: sip2Correct },
   ]
 
   return (
@@ -112,11 +64,31 @@ export default function ResultScreen({ data, onExit }: Props) {
         })}
       </div>
 
-      <div className="qr-section">
-        <span className="qr-label">Mã QR của bạn — PG quét để xác nhận</span>
-        <QRCode />
-        <p style={{ fontSize: 11, color: 'var(--muted)', textAlign: 'center' }}>
-          Mã QR được tạo từ Zalo Mini App
+      <div style={{
+        width: '100%',
+        padding: '18px 20px',
+        background: score === 2
+          ? 'linear-gradient(135deg, rgba(0,166,81,0.15), rgba(0,212,104,0.08))'
+          : score === 1
+          ? 'linear-gradient(135deg, rgba(255,215,0,0.12), rgba(255,180,0,0.06))'
+          : 'rgba(255,255,255,0.05)',
+        border: `1px solid ${score === 2 ? 'rgba(0,212,104,0.3)' : score === 1 ? 'rgba(255,215,0,0.25)' : 'rgba(255,255,255,0.1)'}`,
+        borderRadius: 16,
+        textAlign: 'center' as const,
+        zIndex: 1,
+      }}>
+        <p style={{ fontSize: 22, marginBottom: 6 }}>
+          {score === 2 ? '🎉' : score === 1 ? '🌟' : '💪'}
+        </p>
+        <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--white)', marginBottom: 4 }}>
+          {score === 2
+            ? 'Bạn có khứu giác vị giác tuyệt vời!'
+            : score === 1
+            ? 'Bạn đã đúng một nửa rồi!'
+            : 'Hãy thử lại lần sau nhé!'}
+        </p>
+        <p style={{ fontSize: 13, color: 'var(--muted)' }}>
+          Cảm ơn bạn đã tham gia Milo Pitching Game!
         </p>
       </div>
 

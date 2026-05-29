@@ -1,9 +1,9 @@
 interface Props { onNext: () => void }
 
 const STEPS = [
-  { icon: '🥤', text: 'Thử sản phẩm Milo do PG hướng dẫn' },
-  { icon: '📝', text: 'Ghi lại cảm nhận của bạn (6 lựa chọn)' },
-  { icon: '🎯', text: 'Đoán đúng sản phẩm bạn vừa thử' },
+  { icon: '🥤', text: 'Nhận sản phẩm từ PG và thử một ngụm' },
+  { icon: '📝', text: 'Chọn cảm nhận của bạn về sản phẩm vừa thử' },
+  { icon: '🎯', text: 'Đoán xem bạn vừa uống sản phẩm nào' },
 ]
 
 export default function LandingScreen({ onNext }: Props) {
@@ -21,8 +21,8 @@ export default function LandingScreen({ onNext }: Props) {
         <h1 className="landing-title">MILO PITCHING<br />GAME</h1>
         <div className="divider" />
         <p className="landing-sub">
-          Khám phá hương vị — Đoán đúng sản phẩm<br />
-          và giành phần thưởng!
+          Thử — Cảm nhận — Đoán đúng sản phẩm<br />
+          2 vòng, 2 ngụm, 1 thử thách!
         </p>
       </div>
 
