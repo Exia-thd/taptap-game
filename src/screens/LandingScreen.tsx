@@ -1,4 +1,4 @@
-interface Props { onNext: () => void }
+const BASE = '/taptap-game/assets'
 
 const STEPS = [
   { icon: '🥤', text: 'Nhận sản phẩm từ PG và thử một ngụm' },
@@ -6,20 +6,14 @@ const STEPS = [
   { icon: '🎯', text: 'Đoán xem bạn vừa uống sản phẩm nào' },
 ]
 
+interface Props { onNext: () => void }
+
 export default function LandingScreen({ onNext }: Props) {
   return (
     <div className="screen landing">
       <div className="landing-hero">
-        <div className="landing-logo-wrap">
-          <div className="landing-logo-ring" />
-          <div className="landing-logo-ring" />
-          <div className="landing-logo">
-            <span className="landing-logo-text">MILO</span>
-          </div>
-        </div>
-
+        <div className="landing-logo">MILO</div>
         <h1 className="landing-title">MILO PITCHING<br />GAME</h1>
-        <div className="divider" />
         <p className="landing-sub">
           Thử — Cảm nhận — Đoán đúng sản phẩm<br />
           2 vòng, 2 ngụm, 1 thử thách!
@@ -30,15 +24,20 @@ export default function LandingScreen({ onNext }: Props) {
         {STEPS.map((s, i) => (
           <div key={i} className="landing-step">
             <div className="step-num">{i + 1}</div>
-            <span style={{ fontSize: 20 }}>{s.icon}</span>
+            <span className="step-icon">{s.icon}</span>
             <span className="step-text">{s.text}</span>
           </div>
         ))}
       </div>
 
-      <button className="cta" onClick={onNext}>
-        Chạm để bắt đầu ✦
-      </button>
+      <div className="cta-img-wrap">
+        <img
+          className="cta-img"
+          src={`${BASE}/cta-yellow.png`}
+          alt="Chạm để bắt đầu"
+          onClick={onNext}
+        />
+      </div>
     </div>
   )
 }
