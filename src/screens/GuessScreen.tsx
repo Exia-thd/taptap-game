@@ -7,23 +7,6 @@ interface Props {
 
 const BASE = '/taptap-game/assets'
 
-function ProductCan({ type }: { type: 'pro' | 'coffee' }) {
-  const isPro = type === 'pro'
-  return (
-    <div className="can-wrap">
-      <div className="can-lid" />
-      <div className={`can-body ${isPro ? 'can-body-pro' : 'can-body-coffee'}`}>
-        <span className="can-brand">MILO</span>
-        <span className="can-variant" style={{ fontSize: isPro ? 14 : 11, color: isPro ? '#7FFFB0' : '#D4A554' }}>
-          {isPro ? 'PRO' : 'COFFEE'}
-        </span>
-        <div className="can-stripe" style={{ background: isPro ? 'rgba(57,255,20,.7)' : 'rgba(255,180,50,.7)' }} />
-      </div>
-      <div className="can-bottom" />
-    </div>
-  )
-}
-
 export default function GuessScreen({ sip, selected, onSelect, onNext }: Props) {
   return (
     <div className="screen guess-screen">
@@ -41,8 +24,13 @@ export default function GuessScreen({ sip, selected, onSelect, onNext }: Props) 
             : 'product-card dimmed'
           return (
             <div key={type} className={cls} onClick={() => onSelect(type)}>
-              <div className={`product-visual product-visual-${type}`}>
-                <ProductCan type={type} />
+              <div className="product-photo-wrap">
+                <img
+                  className="product-photo"
+                  src={`${BASE}/milo-${type}.png`}
+                  alt={type === 'pro' ? 'MILO PRO' : 'MILO COFFEE'}
+                  draggable={false}
+                />
               </div>
               <span className={`product-name product-name-${type}`}>
                 {type === 'pro' ? 'MILO PRO' : 'MILO COFFEE'}
