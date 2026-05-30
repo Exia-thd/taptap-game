@@ -7,28 +7,18 @@ interface Props {
   onNext: () => void
 }
 
-export default function GuessScreen({ sip, selected, onSelect, onNext }: Props) {
+export default function GuessScreen({ onSelect, onNext }: Props) {
+  const pick = (type: 'pro' | 'coffee') => {
+    onSelect(type)
+    onNext()
+  }
+
   return (
     <div className="screen guess-screen">
       <img className="screen-bg" src={`${BASE}/4-8.png`} alt="" aria-hidden />
-
       <div className="guess-zones">
-        {(['pro', 'coffee'] as const).map(type => (
-          <div
-            key={type}
-            className={`guess-zone${selected === type ? ' selected' : ''}`}
-            onClick={() => onSelect(type)}
-          />
-        ))}
-      </div>
-
-      <div className="guess-cta">
-        <img
-          className={`cta-img${!selected ? ' disabled' : ''}`}
-          src={`${BASE}/Asset 17 - xem kq.png`}
-          alt="Xem kết quả của bạn ngay"
-          onClick={selected ? onNext : undefined}
-        />
+        <div className="guess-zone" onClick={() => pick('pro')} />
+        <div className="guess-zone" onClick={() => pick('coffee')} />
       </div>
     </div>
   )

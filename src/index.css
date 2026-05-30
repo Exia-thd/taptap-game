@@ -5,13 +5,20 @@
   --neon: #39FF14;
   --yellow: #F5E000;
   --white: #ffffff;
-  --muted: rgba(255,255,255,0.55);
+  --muted: rgba(255, 255, 255, 0.55);
 }
 
 /* ── Reset ─────────────────────────────────────────── */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-html, body {
+html,
+body {
   height: 100%;
   background: #000;
   color: var(--white);
@@ -43,20 +50,33 @@ html, body {
 
 /* ── Screen ────────────────────────────────────────── */
 .screen {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column; align-items: center;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow: hidden;
-  animation: screenIn 0.35s cubic-bezier(0.22,1,0.36,1) both;
+  animation: screenIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
 @keyframes screenIn {
-  from { opacity:0; transform:translateY(24px); }
-  to   { opacity:1; transform:translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── Shared full-screen background ─────────────────── */
 .screen-bg {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: top center;
   pointer-events: none;
@@ -67,68 +87,101 @@ html, body {
 
 /* ── CTA image button ───────────────────────────────── */
 .cta-img {
-  display: block; width: 88%; max-width: 320px;
+  display: block;
+  width: 88%;
+  max-width: 320px;
   cursor: pointer;
   transition: transform 0.12s, filter 0.12s;
-  flex-shrink: 0; user-select: none; -webkit-user-drag: none;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-drag: none;
 }
-.cta-img:active { transform: scale(0.95); filter: brightness(0.88); }
-.cta-img.disabled { opacity: 0.35; pointer-events: none; }
+
+.cta-img:active {
+  transform: scale(0.95);
+  filter: brightness(0.88);
+}
+
+.cta-img.disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
 
 /* ── Neon pulse (reused) ────────────────────────────── */
 @keyframes neonPulse {
-  0%,100%{ box-shadow:0 0 14px rgba(57,255,20,.55),0 0 28px rgba(57,255,20,.25); }
-  50%    { box-shadow:0 0 22px rgba(57,255,20,.85),0 0 44px rgba(57,255,20,.45); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 14px rgba(57, 255, 20, .55), 0 0 28px rgba(57, 255, 20, .25);
+  }
+
+  50% {
+    box-shadow: 0 0 22px rgba(57, 255, 20, .85), 0 0 44px rgba(57, 255, 20, .45);
+  }
 }
 
 /* ══════════════════════════════════════════════════════
    LANDING — màn 01
 ══════════════════════════════════════════════════════ */
-.landing { cursor: pointer; }
+.landing {
+  cursor: pointer;
+}
 
 /* ══════════════════════════════════════════════════════
    CUP SCREEN — màn 02 / 06
 ══════════════════════════════════════════════════════ */
-.cup-screen { cursor: pointer; }
+.cup-screen {
+  cursor: pointer;
+}
 
 /* ══════════════════════════════════════════════════════
    SURVEY SCREEN — màn 03 / 07
 ══════════════════════════════════════════════════════ */
-.survey-screen { padding: 0; }
+.survey-screen {
+  padding: 0;
+  background: #06100a;
+}
 
-/* Transparent hit zones — calibrated to DigitalGameSampling-03/07 (2250×4000px)
-   Boxes: rows at 17-37%, 38.25-58.25%, 59.5-79.5% of image height
-   Columns: left 2.7-47.1%, right 52.9-97.3% of image width             */
-.survey-grid-overlay {
+.survey-grid-images {
   position: absolute;
-  top: 19%;
-  bottom: 20%;
+  top: 3%;
+  bottom: 18%;
   left: 2%;
   right: 2%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  row-gap: 3.3%;
-  column-gap: 6%;
+  gap: 2%;
   z-index: 5;
 }
 
-.survey-hit {
+.survey-img-item {
   cursor: pointer;
   border: 3px solid transparent;
-  border-radius: 12px;
-  background: transparent;
-  transition: border-color .18s, box-shadow .18s, background .18s;
-  outline: none;
-  margin: 2% 1%;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .18s, box-shadow .18s;
+  min-height: 0;
 }
-.survey-hit.selected {
+
+.survey-img-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.survey-img-item.selected {
   border-color: var(--neon);
-  box-shadow: 0 0 8px rgba(57,255,20,.7), 0 0 18px rgba(57,255,20,.3);
-  background: rgba(57,255,20,.07);
+  box-shadow: 0 0 8px rgba(57, 255, 20, .7), 0 0 18px rgba(57, 255, 20, .3);
   animation: neonPulse 1.6s ease-in-out infinite;
 }
-.survey-hit:active { background: rgba(255,255,255,.06); }
+
+.survey-img-item:active {
+  background: rgba(255, 255, 255, .06);
+}
 
 /* CTA overlay at bottom of survey */
 .survey-cta-overlay {
@@ -141,6 +194,7 @@ html, body {
   display: flex;
   justify-content: center;
 }
+
 .survey-cta-overlay .cta-img {
   width: 100%;
   max-width: none;
@@ -149,51 +203,50 @@ html, body {
 /* ══════════════════════════════════════════════════════
    GUESS SCREEN — màn 04 / 08  (dùng 4-8.png)
 ══════════════════════════════════════════════════════ */
-.guess-screen { padding: 0; }
+.guess-screen {
+  padding: 0;
+}
 
 .guess-zones {
   position: absolute;
-  top: 18%; bottom: 18%;
-  left: 0; right: 0;
+  top: 35%;
+  bottom: 8%;
+  left: 3%;
+  right: 3%;
   display: flex;
+  gap: 5%;
   z-index: 5;
 }
-.guess-zone {
-  flex: 1; cursor: pointer;
-  border: 3px solid transparent;
-  border-radius: 14px; margin: 0 5px;
-  transition: border-color .25s, box-shadow .25s, background .25s;
-}
-.guess-zone.selected {
-  border-color: var(--neon);
-  box-shadow: 0 0 32px rgba(57,255,20,.6), 0 0 64px rgba(57,255,20,.22);
-  background: rgba(57,255,20,.08);
-  animation: neonPulse 1.6s ease-in-out infinite;
-}
-.guess-zone:active { background: rgba(255,255,255,.07); }
 
-.guess-cta {
-  position: absolute;
-  bottom: 4%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 88%;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
+.guess-zone {
+  flex: 1;
+  cursor: pointer;
+  border: 3px solid transparent;
+  border-radius: 14px;
+  transition: border-color .15s, background .15s;
+}
+
+.guess-zone:active {
+  border-color: var(--neon);
+  box-shadow: 0 0 24px rgba(57, 255, 20, .6);
+  background: rgba(57, 255, 20, .08);
 }
 
 /* ══════════════════════════════════════════════════════
    ANSWER SCREEN — màn 05 / 09
 ══════════════════════════════════════════════════════ */
-.answer-screen { cursor: pointer; }
+.answer-screen {
+  cursor: pointer;
+}
 
 /* Overlay for wrong answer — covers top portion of background */
 .answer-wrong-overlay {
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 28%;
-  background: rgba(0,0,0,.82);
+  background: rgba(0, 0, 0, .82);
   z-index: 10;
   display: flex;
   flex-direction: column;
@@ -202,6 +255,7 @@ html, body {
   gap: 8px;
   padding: 16px;
 }
+
 .answer-wrong-title {
   font-size: clamp(20px, 6vw, 28px);
   font-weight: 900;
@@ -209,41 +263,35 @@ html, body {
   text-align: center;
   letter-spacing: .04em;
 }
+
 .answer-wrong-sub {
   font-size: clamp(13px, 3.5vw, 16px);
-  color: rgba(255,255,255,.8);
+  color: rgba(255, 255, 255, .8);
   text-align: center;
 }
 
 /* ══════════════════════════════════════════════════════
    RESULT SCREEN — màn 10
 ══════════════════════════════════════════════════════ */
-.result-screen { }
+.result-screen {}
 
-.result-replay {
+.result-home-btn {
   position: absolute;
-  bottom: 4%;
+  top: 74%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-}
-.result-exit {
-  padding: 13px 36px;
-  background: transparent;
-  border: 2px solid rgba(255,255,255,.35);
-  border-radius: 50px;
-  color: rgba(255,255,255,.8);
-  font-family: inherit;
-  font-size: clamp(13px, 3.5vw, 15px);
-  font-weight: 800;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.85);
+  display: flex; align-items: center; justify-content: center;
   cursor: pointer;
-  transition: border-color .18s, color .18s, background .18s;
-  white-space: nowrap;
+  transition: background .18s, border-color .18s, transform .12s;
 }
-.result-exit:active {
-  border-color: rgba(255,255,255,.7);
-  color: var(--white);
-  background: rgba(255,255,255,.1);
+.result-home-btn:active {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: translateX(-50%) scale(0.93);
 }

@@ -7,9 +7,9 @@ interface Props {
   onNext: () => void
 }
 
-const BG: Record<1 | 2, string> = {
-  1: '[MILO] DigitalGameSampling-03.png',
-  2: '[MILO] DigitalGameSampling-07.png',
+const ASSETS: Record<1 | 2, string[]> = {
+  1: ['Asset 3.png', 'Asset 4.png', 'Asset 5.png', 'Asset 6.png', 'Asset 7.png', 'Asset 8.png'],
+  2: ['Asset 10.png', 'Asset 11.png', 'Asset 12.png', 'Asset 13.png', 'Asset 14.png', 'Asset 15.png'],
 }
 
 export default function SurveyScreen({ sip, selected, onSelect, onNext }: Props) {
@@ -22,16 +22,15 @@ export default function SurveyScreen({ sip, selected, onSelect, onNext }: Props)
 
   return (
     <div className="screen survey-screen">
-      <img className="screen-bg" src={`${BASE}/${BG[sip]}`} alt="" aria-hidden />
-
-      {/* Transparent hit zones — positioned to cover the 6 boxes in the background */}
-      <div className="survey-grid-overlay">
-        {[0, 1, 2, 3, 4, 5].map(i => (
+      <div className="survey-grid-images">
+        {ASSETS[sip].map((asset, i) => (
           <div
             key={i}
-            className={`survey-hit${selected.includes(i) ? ' selected' : ''}`}
+            className={`survey-img-item${selected.includes(i) ? ' selected' : ''}`}
             onClick={() => toggle(i)}
-          />
+          >
+            <img src={`${BASE}/${asset}`} alt="" aria-hidden draggable={false} />
+          </div>
         ))}
       </div>
 
