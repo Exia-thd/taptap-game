@@ -6,10 +6,8 @@ export default function CupScreen({ sip, onNext }: Props) {
   return (
     <div className="screen cup-screen">
       <div className="cup-screen-top">
-        <span className="badge">Vòng {sip} / 2</span>
-        <h2 className="cup-headline">
-          {sip === 1 ? 'Bạn vừa thử\nmột ngụm Milo!' : 'Và đây là\nngụm thứ hai!'}
-        </h2>
+        <span className="badge">SIP {sip}</span>
+        <h2 className="cup-headline">MATCH<br />THE ENERGY</h2>
       </div>
 
       <div className="cup-arena">
@@ -24,7 +22,6 @@ export default function CupScreen({ sip, onNext }: Props) {
         </div>
       </div>
 
-      <p className="cup-hint">Hãy để hương vị lắng đọng...</p>
       <div className="cta-img-wrap">
         <img
           className="cta-img"
