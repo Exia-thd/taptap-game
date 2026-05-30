@@ -97,14 +97,9 @@ body {
   -webkit-user-drag: none;
 }
 
-.cta-img:hover {
+.cta-img:active {
   transform: scale(1.06);
   filter: brightness(1.1);
-}
-
-.cta-img:active {
-  transform: scale(0.95);
-  filter: brightness(0.88);
 }
 
 .cta-img.disabled {
@@ -303,12 +298,6 @@ body {
   position: relative;
 }
 
-.survey-img-item:hover {
-  transform: scale(1.06);
-  box-shadow: 0 6px 18px rgba(57, 255, 20, 0.4);
-  z-index: 10;
-}
-
 .survey-img-item img {
   width: 100%;
   height: 100%;
@@ -319,24 +308,16 @@ body {
   transition: transform .22s;
 }
 
-.survey-img-item:hover img {
-  transform: scale(1.02);
-}
-
 .survey-img-item.selected {
   border-color: var(--neon);
   box-shadow: 0 0 8px rgba(57, 255, 20, .7), 0 0 18px rgba(57, 255, 20, .3);
   animation: neonPulse 1.6s ease-in-out infinite;
 }
 
-.survey-img-item.selected:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 24px rgba(57, 255, 20, 0.85);
-}
-
 .survey-img-item:active {
-  background: rgba(255, 255, 255, .06);
-  transform: scale(0.97);
+  transform: scale(1.06);
+  box-shadow: 0 6px 18px rgba(57, 255, 20, 0.4);
+  z-index: 10;
 }
 
 /* CTA overlay at bottom of survey */
@@ -404,13 +385,14 @@ body {
   transform: translateX(3%);
 }
 
-.guess-product-item:hover .guess-product-img {
-  transform: scale(1.15);
+.guess-product-item.right:active .guess-product-img {
+  transform: translateX(3%) scale(1.15);
   filter: drop-shadow(0 10px 20px rgba(57, 255, 20, 0.45));
 }
 
 .guess-product-item:active .guess-product-img {
-  transform: scale(0.96);
+  transform: scale(1.15);
+  filter: drop-shadow(0 10px 20px rgba(57, 255, 20, 0.45));
 }
 
 /* ══════════════════════════════════════════════════════
@@ -478,16 +460,10 @@ body {
   transition: background .18s, border-color .18s, transform .12s;
 }
 
-.result-home-btn:hover {
-  background: rgba(0, 0, 0, 0.75);
-  border-color: rgba(255, 255, 255, 0.7);
-  transform: translateX(-50%) scale(1.1);
-}
-
 .result-home-btn:active {
   background: rgba(0, 0, 0, 0.8);
   border-color: rgba(255, 255, 255, 0.8);
-  transform: translateX(-50%) scale(0.93);
+  transform: translateX(-50%) scale(1.1);
 }
 
 /* ── Lark submit status notification toast ───────────── */
