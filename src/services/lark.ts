@@ -73,23 +73,15 @@ export async function submitGameData(gameData: GameData): Promise<void> {
       searchParams.get('id') ||
       `guest_${Math.random().toString(36).substring(2, 10)}`
 
-    // Determine the result (Win if both are correct, else Lose)
-    // Correct answers: SIP 1 = 'pro', SIP 2 = 'coffee'
+    // SIP 1 correct = left ('pro'), SIP 2 correct = right ('coffee')
     const isSip1Correct = gameData.sip1Guess === 'pro'
     const isSip2Correct = gameData.sip2Guess === 'coffee'
-    const result = isSip1Correct && isSip2Correct ? 'win' : 'lose'
-
-    // Format guesses
-    const formatGuess = (g: 'pro' | 'coffee' | null) => {
-      if (g === 'pro') return 'MILO PRO'
-      if (g === 'coffee') return 'MILO COFFEE'
-      return ''
-    }
+    const result = (isSip1Correct ? 1 : 0) + (isSip2Correct ? 1 : 0)
 
     // Build fields mapping matching Bitable fields schema
-    const fields: Record<string, string> = {
+    const fields: Record<string, string | number> = {
       'Zalo ID': zaloId,
-      
+
       // SIP 1 Survey selection (value 1 to value 6)
       'SIP 1-1': gameData.sip1Survey.includes(0) ? 'value 1' : '',
       'SIP 1-2': gameData.sip1Survey.includes(1) ? 'value 2' : '',
@@ -106,11 +98,11 @@ export async function submitGameData(gameData: GameData): Promise<void> {
       'SIP 2-5': gameData.sip2Survey.includes(4) ? 'value 11' : '',
       'SIP 2-6': gameData.sip2Survey.includes(5) ? 'value 12' : '',
 
-      // Guesses
-      'SIP1 - GAME': formatGuess(gameData.sip1Guess),
-      'SIP2 - GAME': formatGuess(gameData.sip2Guess),
+      // Game results: 1 if correct, '' if wrong
+      'SIP1 - GAME': isSip1Correct ? 1 : '',
+      'SIP2 - GAME': isSip2Correct ? 1 : '',
 
-      // Final Result
+      // Total correct answers
       'RESULT': result,
     }
 
