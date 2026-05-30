@@ -22,6 +22,7 @@ export default function SurveyScreen({ sip, selected, onSelect, onNext }: Props)
 
   return (
     <div className="screen survey-screen">
+      <img className="screen-bg" src={`${BASE}/BG3.png`} alt="" aria-hidden />
       <div className="survey-grid-images">
         {ASSETS[sip].map((asset, i) => (
           <div

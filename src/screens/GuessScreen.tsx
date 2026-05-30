@@ -15,10 +15,25 @@ export default function GuessScreen({ onSelect, onNext }: Props) {
 
   return (
     <div className="screen guess-screen">
-      <img className="screen-bg" src={`${BASE}/4-8.png`} alt="" aria-hidden />
-      <div className="guess-zones">
-        <div className="guess-zone" onClick={() => pick('pro')} />
-        <div className="guess-zone" onClick={() => pick('coffee')} />
+      <img className="screen-bg" src={`${BASE}/B4.png`} alt="" aria-hidden />
+
+      <div className="guess-products-container">
+        <div className="guess-product-item left" onClick={() => pick('pro')}>
+          <img
+            className="guess-product-img"
+            src={`${BASE}/product 3.png`}
+            alt="MILO PRO"
+            draggable={false}
+          />
+        </div>
+        <div className="guess-product-item right" onClick={() => pick('coffee')}>
+          <img
+            className="guess-product-img"
+            src={`${BASE}/Artboard 4.png`}
+            alt="MILO COFFEE"
+            draggable={false}
+          />
+        </div>
       </div>
     </div>
   )
