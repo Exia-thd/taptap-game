@@ -64,9 +64,9 @@ export default {
         'SIP 2-4': gameData.sip2Survey?.includes(3) ? 'value 10' : '',
         'SIP 2-5': gameData.sip2Survey?.includes(4) ? 'value 11' : '',
         'SIP 2-6': gameData.sip2Survey?.includes(5) ? 'value 12' : '',
-        'SIP1 - GAME': isSip1Correct ? 1 : '',
-        'SIP2 - GAME': isSip2Correct ? 1 : '',
-        'RESULT': result,
+        'SIP1 - GAME': isSip1Correct ? '1' : '',
+        'SIP2 - GAME': isSip2Correct ? '1' : '',
+        'RESULT': String(result),
       }
 
       // Step 3: Submit record to Bitable
