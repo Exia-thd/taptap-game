@@ -60,14 +60,9 @@ body {
 }
 
 @keyframes screenIn {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  0%   { opacity: 0; transform: scale(0.96) translateY(20px); }
+  60%  { opacity: 1; transform: scale(1.01) translateY(-3px); }
+  100% { opacity: 1; transform: scale(1) translateY(0);
   }
 }
 
@@ -670,6 +665,43 @@ body {
 .result-screen .screen-bg {
   animation: screenIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both,
              resultGlow 3.5s ease-in-out 0.5s infinite;
+}
+
+/* ── Impact rings — guess screen can selection ──────── */
+@keyframes impactRing {
+  0%   { transform: translate(-50%, -50%) scale(0.3); opacity: 1;   }
+  100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0;   }
+}
+
+.impact-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  border: 3px solid var(--neon);
+  box-shadow: 0 0 12px var(--neon), 0 0 24px rgba(57, 255, 20, 0.5);
+  pointer-events: none;
+  z-index: 20;
+  animation: impactRing 0.65s cubic-bezier(0.2, 0.6, 0.4, 1) forwards;
+}
+
+.impact-ring.r2 { animation-delay: 0.1s;  border-color: rgba(57, 255, 20, 0.6); box-shadow: none; }
+.impact-ring.r3 { animation-delay: 0.22s; border-color: rgba(57, 255, 20, 0.3); box-shadow: none; }
+
+/* ── Confetti — result screen ───────────────────────── */
+@keyframes confettiFall {
+  0%   { transform: translateY(-10px) rotate(0deg);               opacity: 1;   }
+  80%  { opacity: 1; }
+  100% { transform: translateY(105dvh) rotate(var(--rot, 360deg)); opacity: 0;   }
+}
+
+.confetti-piece {
+  position: absolute;
+  top: 0;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 20;
+  animation: confettiFall linear both;
 }
 
 /* ── Lark submit status notification toast ───────────── */

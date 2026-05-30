@@ -28,23 +28,15 @@ export default function GuessScreen({ onSelect, onNext }: Props) {
           className={`guess-product-item left${picked === 'pro' ? ' picked' : picked === 'coffee' ? ' faded' : ''}`}
           onClick={() => pick('pro')}
         >
-          <img
-            className="guess-product-img"
-            src={`${BASE}/product 3.png`}
-            alt="MILO PRO"
-            draggable={false}
-          />
+          {picked === 'pro' && <><div className="impact-ring r1"/><div className="impact-ring r2"/><div className="impact-ring r3"/></>}
+          <img className="guess-product-img" src={`${BASE}/product 3.png`} alt="MILO PRO" draggable={false} />
         </div>
         <div
           className={`guess-product-item right${picked === 'coffee' ? ' picked' : picked === 'pro' ? ' faded' : ''}`}
           onClick={() => pick('coffee')}
         >
-          <img
-            className="guess-product-img"
-            src={`${BASE}/Artboard 4.png`}
-            alt="MILO COFFEE"
-            draggable={false}
-          />
+          {picked === 'coffee' && <><div className="impact-ring r1"/><div className="impact-ring r2"/><div className="impact-ring r3"/></>}
+          <img className="guess-product-img" src={`${BASE}/Artboard 4.png`} alt="MILO COFFEE" draggable={false} />
         </div>
       </div>
     </div>
