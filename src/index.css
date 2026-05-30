@@ -158,18 +158,98 @@ body {
 }
 
 .landing-float-1 {
-  bottom: 22%;
-  left: 4%;
+  bottom: 22%; left: 4%;
   width: 38%;
   animation: floatSpin1 3.8s ease-in-out infinite;
 }
 
 .landing-float-2 {
-  bottom: 20%;
-  right: 4%;
+  bottom: 20%; right: 4%;
   width: 32%;
   animation: floatSpin2 4.2s ease-in-out 1.4s infinite;
 }
+
+
+/* Light sweep — cinema dual beams */
+@keyframes lightSweepL {
+  0%   { transform: translateX(-110%) skewX(-15deg); opacity: 0; }
+  10%  { opacity: 1; }
+  45%  { opacity: 0.85; }
+  55%  { transform: translateX(115%) skewX(-15deg); opacity: 0; }
+  100% { transform: translateX(115%) skewX(-15deg); opacity: 0; }
+}
+@keyframes lightSweepR {
+  0%   { transform: translateX(110%) skewX(15deg); opacity: 0; }
+  10%  { opacity: 1; }
+  45%  { opacity: 0.85; }
+  55%  { transform: translateX(-115%) skewX(15deg); opacity: 0; }
+  100% { transform: translateX(-115%) skewX(15deg); opacity: 0; }
+}
+
+.landing-light-sweep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  overflow: hidden;
+}
+.landing-light-sweep::before,
+.landing-light-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 40%;
+}
+.landing-light-sweep::before {
+  left: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 40%, rgba(57,255,20,0.12) 60%, transparent 100%);
+  animation: lightSweepL 5s ease-in-out 0.5s infinite;
+}
+.landing-light-sweep::after {
+  right: 0;
+  background: linear-gradient(270deg, transparent 0%, rgba(255,255,255,0.18) 40%, rgba(57,255,20,0.12) 60%, transparent 100%);
+  animation: lightSweepR 5s ease-in-out 1.5s infinite;
+}
+
+/* Fireflies */
+@keyframes fireflyFloat {
+  0%   { opacity: 0; transform: translate(var(--fx,0px), 0px) scale(0.5); }
+  20%  { opacity: 1; }
+  80%  { opacity: 0.8; }
+  100% { opacity: 0; transform: translate(var(--fx,0px), -110px) scale(0.2); }
+}
+
+.landing-fireflies { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+
+.landing-firefly {
+  position: absolute;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--neon);
+  box-shadow: 0 0 12px var(--neon), 0 0 24px rgba(57,255,20,0.7), 0 0 40px rgba(57,255,20,0.3);
+  animation: fireflyFloat 3s ease-out infinite;
+}
+
+.landing-firefly.lf1  { left: 12%; bottom: 18%; animation-delay: 0s;    --fx: 10px;  }
+.landing-firefly.lf2  { left: 28%; bottom: 22%; animation-delay: 0.4s;  --fx: -8px;  width:8px;  height:8px;  }
+.landing-firefly.lf3  { left: 45%; bottom: 15%; animation-delay: 0.8s;  --fx: 15px;  }
+.landing-firefly.lf4  { left: 62%; bottom: 20%; animation-delay: 1.2s;  --fx: -12px; width:8px;  height:8px;  }
+.landing-firefly.lf5  { left: 78%; bottom: 25%; animation-delay: 0.6s;  --fx: 8px;   }
+.landing-firefly.lf6  { left: 90%; bottom: 16%; animation-delay: 1.6s;  --fx: -6px;  width:8px;  height:8px;  }
+.landing-firefly.lf7  { left: 20%; bottom: 35%; animation-delay: 1.0s;  --fx: 12px;  width:13px; height:13px; }
+.landing-firefly.lf8  { left: 55%; bottom: 30%; animation-delay: 1.8s;  --fx: -10px; }
+.landing-firefly.lf9  { left: 72%; bottom: 38%; animation-delay: 0.3s;  --fx: 6px;   width:8px;  height:8px;  }
+.landing-firefly.lf10 { left: 38%; bottom: 42%; animation-delay: 2.1s;  --fx: -14px; }
+.landing-firefly.lf11 { left: 85%; bottom: 32%; animation-delay: 1.4s;  --fx: 9px;   width:13px; height:13px; }
+.landing-firefly.lf12 { left: 5%;  bottom: 40%; animation-delay: 0.9s;  --fx: 11px;  width:8px;  height:8px;  }
+.landing-firefly.lf13 { left: 33%; bottom: 10%; animation-delay: 0.5s;  --fx: -9px;  width:11px; height:11px; }
+.landing-firefly.lf14 { left: 50%; bottom: 45%; animation-delay: 1.3s;  --fx: 13px;  }
+.landing-firefly.lf15 { left: 68%; bottom: 12%; animation-delay: 2.4s;  --fx: -7px;  width:8px;  height:8px;  }
+.landing-firefly.lf16 { left: 8%;  bottom: 55%; animation-delay: 0.7s;  --fx: 16px;  width:13px; height:13px; }
+.landing-firefly.lf17 { left: 42%; bottom: 55%; animation-delay: 1.9s;  --fx: -11px; width:8px;  height:8px;  }
+.landing-firefly.lf18 { left: 82%; bottom: 48%; animation-delay: 2.7s;  --fx: 7px;   }
+.landing-firefly.lf19 { left: 15%; bottom: 60%; animation-delay: 3.1s;  --fx: -15px; width:11px; height:11px; }
+.landing-firefly.lf20 { left: 60%; bottom: 58%; animation-delay: 2.5s;  --fx: 10px;  width:8px;  height:8px;  }
 
 .landing-cta-container {
   position: absolute;
