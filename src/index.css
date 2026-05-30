@@ -128,7 +128,6 @@ body {
 /* ══════════════════════════════════════════════════════
    LANDING — màn 01
 ══════════════════════════════════════════════════════ */
-.landing {}
 
 .landing-cta-container {
   position: absolute;
@@ -141,7 +140,6 @@ body {
   z-index: 10;
 }
 
-.cup-screen {}
 
 .cup-glass-container {
   position: absolute;
@@ -418,7 +416,6 @@ body {
 /* ══════════════════════════════════════════════════════
    ANSWER SCREEN — màn 05 / 09
 ══════════════════════════════════════════════════════ */
-.answer-screen {}
 
 .answer-cta-container {
   position: absolute;
@@ -461,7 +458,6 @@ body {
 /* ══════════════════════════════════════════════════════
    RESULT SCREEN — màn 10
 ══════════════════════════════════════════════════════ */
-.result-screen {}
 
 .result-home-btn {
   position: absolute;
